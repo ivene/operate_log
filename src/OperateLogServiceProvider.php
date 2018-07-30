@@ -2,6 +2,7 @@
 
 namespace Ivene\OperateLog;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 
 class OperateLogServiceProvider extends ServiceProvider
@@ -25,14 +26,14 @@ class OperateLogServiceProvider extends ServiceProvider
         $model = config("oplog");
         if ($model) {
             foreach ($model as $k => $v) {
-                $v::updated(function ($data) {
-                    ActionLog::createActionLog('update', "更新的id:" . $data->id);
+                $v::updated(function ($data) use($v) {
+                    Log::error($v." 更新了一条记录");
+                 });
+                $v::created(function ($data) use($v) {
+                    Log::error($v." 创建了一条记录");
                 });
-                $v::created(function ($data) {
-                    ActionLog::createActionLog('add', "新建的id:" . $data->id);
-                });
-                $v::deleted(function ($data) {
-                    ActionLog::createActionLog('delete', "删除的id:" . $data->id);
+                $v::deleted(function ($data) use($v) {
+                    Log::error($v." 删除了一条记录");
                 });
             }
         }

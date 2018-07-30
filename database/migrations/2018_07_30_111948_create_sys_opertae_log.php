@@ -15,10 +15,13 @@ class CreateSysOpertaeLog extends Migration
     {
         Schema::create('sys_operate_log', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('op_uid');
-            $table->integer('op_uname');
-            $table->string('client_ip');
-            $table->string('action');
+            $table->string('action',100)->comment('行为动作');
+            $table->string('type')->comment('日志分类 admin  api  wen');
+            $table->string('description');
+            $table->integer('op_uid')->default('0')->comment('操作人编号');
+            $table->string('client_ip')->default('')->comment('请求IP');
+            $table->string('client_type')->default('')->comment('客户端类型 ');
+            $table->string('client_version')->default('')->comment('客户端版本');
             $table->timestamps();
         });
     }
