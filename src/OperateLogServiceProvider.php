@@ -14,15 +14,9 @@ class OperateLogServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__ . '/migrations' => database_path('migrations'),
-        ], 'migrations');
-//        $this->loadMigrationsFrom(__DIR__."/../database/migrations");
-
-        $this->publishes([
-            __DIR__ . '/config/oplog.php' => config_path('oplog.php'),
+        $this->loadMigrationsFrom(__DIR__."/../database/migrations");
+        $this->publishes([__DIR__ . '/config/oplog.php' => config_path('oplog.php'),
         ], 'config');
-
         $model = config("oplog");
         if ($model) {
             foreach ($model as $k => $v) {
@@ -38,9 +32,6 @@ class OperateLogServiceProvider extends ServiceProvider
             }
         }
     }
-
-
-
     /**
      * Register the application services.
      *
