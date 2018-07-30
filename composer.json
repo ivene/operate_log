@@ -1,0 +1,34 @@
+{
+    "name": "ivene/operate-log",
+    "description": "The laravel operate log plugin",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yao.Yao",
+            "email": "yao_ivene@163.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.1.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ivene\\OperateLog\\":"src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ivene\\OperateLog\\OperateLogServiceProvider"
+            ],
+            "aliases": {
+                "OperateLog": "Ivene\\OperateLog\\Facade\\OperateLogFacade"
+            }
+        }
+    }
+}
