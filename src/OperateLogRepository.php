@@ -22,6 +22,7 @@ class OperateLogRepository
         $oplog->type = $type;
         $oplog->op_data  = empty($data)? '' : json_encode($data);
         $oplog->client_ip =  request()->getClientIp() ? request()->getClientIp() : 'unknow';
+        $oplog->client_type =  request()->get('client_type') ? request()->get('client_type') :'unknow';
         $oplog->request_url  = request()->getRequestUri() ? request()->getRequestUri() : 'unknow';
         $oplog->client_version  = request()->get('version') ? request()->get('version') :'unknow';
         $oplog->save();

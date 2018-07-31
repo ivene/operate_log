@@ -1,4 +1,7 @@
+
+
 ## 安装方法
+
 ```
 composer require  ivene/operate-log
 php artisan migrate
@@ -19,6 +22,7 @@ php artisan vendor:publish --provider="Ivene\OperateLog\OperateLogServiceProvide
   ```
   
 ## 配置方法
+
 ``` 
 <?php
 return [
@@ -31,8 +35,9 @@ return [
 ```
 
 ##使用方法
+
 ```
-use Oplog
+use Oplog;
 Oplog::apiLog('动作','描述','需要记录的数据');
 Oplog::adminLog('动作','描述','需要记录的数据');
 ```
