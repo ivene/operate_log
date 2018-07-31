@@ -18,7 +18,7 @@ class CreateSysOpertaeLog extends Migration
             $table->string('action',100)->default('unknow')->comment('行为动作');
             $table->string('type')->default('unknow')->comment('日志分类 admin  api  web');
             $table->string('description')->default('');
-            $table->text('op_data')->default('');
+            $table->text('op_data');
             $table->string('op_uid')->default('0')->comment('操作人编号');
             $table->string('client_ip')->default('unknow')->comment('请求IP');
             $table->string('client_type')->default('unknow')->comment('客户端类型 ');

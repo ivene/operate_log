@@ -10,19 +10,18 @@ namespace Ivene\OperateLog;
 
 use Illuminate\Support\Facades\Session;
 use Ivene\OperateLog\Http\Models\SysOperateLog;
-use Jenssegers\Agent\Agent;
 
 class OperateLogRepository
 {
     private function createActionLog($uid,$action,$description,$data,$type)
     {
         $oplog = new  SysOperateLog();
-        $oplog->uid =$uid;
+        $oplog->op_uid =$uid;
         $oplog->action = $action;
         $oplog->description = $description;
         $oplog->type = $type;
         $oplog->op_data  = empty($data)? '' : json_encode($data);
-        $oplog->client_id =  request()->getClientIp() ? request()->getClientIp() : 'unknow';
+        $oplog->client_ip =  request()->getClientIp() ? request()->getClientIp() : 'unknow';
         $oplog->request_url  = request()->getRequestUri() ? request()->getRequestUri() : 'unknow';
         $oplog->client_version  = request()->get('version') ? request()->get('version') :'unknow';
         $oplog->save();

@@ -12,16 +12,4 @@ class SysOperateLog extends Model
 {
     protected $table = 'sys_operate_log';
     public $timestamps = true;
-//    protected $fillable=[
-//    'uname',
-//    'loginname',
-//    'iphone',
-//    'email',
-//    'img',
-//    'ustatus',
-//    'salt'
-//    ];
-//
-//    protected $hidden=['password','salt','updated_at'];
-
 }
