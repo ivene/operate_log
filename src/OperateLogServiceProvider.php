@@ -4,7 +4,7 @@ namespace Ivene\OperateLog;
 
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
-
+use Oplog;
 class OperateLogServiceProvider extends ServiceProvider
 {
     /**
@@ -15,19 +15,20 @@ class OperateLogServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadMigrationsFrom(__DIR__."/../database/migrations");
-        $this->publishes([__DIR__ . '/config/oplog.php' => config_path('oplog.php'),
+        $this->publishes([
+            __DIR__ . '/config/oplog.php' => config_path('oplog.php'),
         ], 'config');
-        $model = config("oplog");
+        $model = config("oplog.listenModel");
         if ($model) {
             foreach ($model as $k => $v) {
                 $v::updated(function ($data) use($v) {
-                    Log::error($v." 更新了一条记录");
+                    Oplog::autoLog('updated',$v,$data);
                  });
                 $v::created(function ($data) use($v) {
-                    Log::error($v." 创建了一条记录");
+                    Oplog::autoLog('created',$v,$data);
                 });
                 $v::deleted(function ($data) use($v) {
-                    Log::error($v." 删除了一条记录");
+                    Oplog::autoLog('deleted',$v,$data);
                 });
             }
         }
